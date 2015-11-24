@@ -32,6 +32,11 @@ dnvm list
 dnu restore
 ```
 
+- Make sure the right runtime is used
+```shell
+dnvm use 1.0.0-beta8 -r coreclr
+```
+
 - Execute command
 ```shell
 dnx kestrel

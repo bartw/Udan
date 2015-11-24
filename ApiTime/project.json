@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0-*",
+    "webroot": "wwwroot",
+    "exclude": [
+        "wwwroot"
+    ],
+    "dependencies": {
+        "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+        "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
+        "Microsoft.AspNet.Hosting": "1.0.0-beta8"
+    },
+    "commands": {
+        "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://*:5004"
+    },
+    "frameworks": {
+        "dnxcore50": { }
+    }
+}
