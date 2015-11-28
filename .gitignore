@@ -1,2 +1,5 @@
 #ignore generated project.lock.json
 project.lock.json
+
+#ignore generated db
+*.db
