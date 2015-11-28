@@ -71,7 +71,7 @@ docker pull microsoft/aspnet:1.0.0-beta8-coreclr
 
 - Build Udan
 ```shell
-docker -t udan .
+docker build -t udan .
 ```
 
 - Check docker images
