@@ -15,6 +15,7 @@
 
 ## Add or edit following files
 
+- Dockerfile
 - Config.json
 - Startup.cs
 - TechnologyController.cs
@@ -23,8 +24,6 @@
 
 ## On Ubuntu
 ```shell
-sudo apt-get install libsqlite3-dev
-sudo apt-get install sqlite3
 docker exec -it containerid /bin/bash
 docker rm $(docker ps -a -q)
 ```
