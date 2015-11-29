@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.Framework.OptionsModel;
 
 namespace Udan.Models
 {
@@ -25,11 +26,11 @@ namespace Udan.Models
                     
                     var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
                 
-                    //var admin = new ApplicationUser { UserName = "admin" };
+                    var admin = new ApplicationUser { UserName = "admin" };
                     var guest = new ApplicationUser { UserName = "guest" };
                     
-                    //await userManager.CreateAsync(admin, "v3ry h4rd t0 gu355");
-                    await userManager.CreateAsync(guest, "gU3st");
+                    await userManager.CreateAsync(admin, "v3rY.h4rd t0_gu3!5");
+                    await userManager.CreateAsync(guest, "gU35t!");
                     
                     context.SaveChanges();
                 }

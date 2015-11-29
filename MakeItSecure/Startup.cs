@@ -24,14 +24,14 @@ namespace HelloWorld
         }
         
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            
+        {   
             services.AddEntityFramework()
                 .AddSqlite()
                 .AddDbContext<UdanDbContext>(options => options.UseSqlite(Configuration["Data:ConnectionString"]));
                 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UdanDbContext>();
+            
+            services.AddMvc();
         }
         
         public void Configure(IApplicationBuilder app)
