@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.DependencyInjection;
@@ -6,6 +5,7 @@ using Microsoft.Framework.Configuration;
 using Udan.Models;
 using Microsoft.Dnx.Runtime;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HelloWorld
 {
@@ -29,15 +29,19 @@ namespace HelloWorld
             
             services.AddEntityFramework()
                 .AddSqlite()
-                .AddDbContext<TechnologyContext>(options => options.UseSqlite(Configuration["Data:ConnectionString"]));
+                .AddDbContext<UdanDbContext>(options => options.UseSqlite(Configuration["Data:ConnectionString"]));
+                
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UdanDbContext>();
         }
         
         public void Configure(IApplicationBuilder app)
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseIdentity();
             app.UseMvc();
-            SampleData.Initialize(app.ApplicationServices);
+            
+            SampleData.Initialize(app.ApplicationServices).Wait();
         }
     }
 }

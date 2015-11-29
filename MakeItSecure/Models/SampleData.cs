@@ -1,27 +1,38 @@
-using Microsoft.Data.Entity;
 using Microsoft.Framework.DependencyInjection;
 using System;
 using System.Linq;
-using Microsoft.Data.Entity.Storage;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Udan.Models
 {
 	public static class SampleData
 	{
-		public static void Initialize(IServiceProvider serviceProvider)
+		public static async Task Initialize(IServiceProvider serviceProvider)
 		{
-            var context = serviceProvider.GetService<TechnologyContext>();
+            var context = serviceProvider.GetService<UdanDbContext>();
             
-            context.Database.EnsureCreated();
-            
-            if (!context.Technologies.Any()) 
+            if (await context.Database.EnsureCreatedAsync())
             {
-                context.Technologies.AddRange(
-                    new Technology { Name = "Ubuntu" },
-                    new Technology { Name = "Docker" },
-                    new Technology { Name = "ASP.NET" }
-                );
-                context.SaveChanges();    
+                if (!context.Technologies.Any()) 
+                {
+                    context.Technologies.AddRange(
+                        new Technology { Name = "Ubuntu" },
+                        new Technology { Name = "Docker" },
+                        new Technology { Name = "ASP.NET" }
+                    );
+                    
+                    var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+                
+                    //var admin = new ApplicationUser { UserName = "admin" };
+                    var guest = new ApplicationUser { UserName = "guest" };
+                    
+                    //await userManager.CreateAsync(admin, "v3ry h4rd t0 gu355");
+                    await userManager.CreateAsync(guest, "gU3st");
+                    
+                    context.SaveChanges();
+                }
             }
 		}
 	}

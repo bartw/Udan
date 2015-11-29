@@ -1,29 +1,31 @@
-using System.Collections.Generic;
 using Udan.Models;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.DependencyInjection;
 using System.Linq;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
 
 namespace Udan.Api
-{		
+{
+	[Authorize]
 	[Route("api/technologies")]
 	public class TechnologyController : Controller
 	{
-		private TechnologyContext _context;
+		private UdanDbContext _context;
 	
-		public TechnologyController (TechnologyContext context)
+		public TechnologyController (UdanDbContext context)
 		{
             _context = context;
         }
 		
 		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Get()
 		{
 			return Json(_context.Technologies);
 		}
 		
 		[HttpGet("{id}", Name="GetTechnology")]
+		[AllowAnonymous]
 		public IActionResult Get(int id)
 		{
 			var technology = _context.Technologies.FirstOrDefault(t => t.Id == id);

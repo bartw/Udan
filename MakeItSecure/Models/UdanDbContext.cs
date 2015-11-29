@@ -1,8 +1,11 @@
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Udan.Models
 {
-    public class TechnologyContext : DbContext
+    public class ApplicationUser : IdentityUser {}
+    
+    public class UdanDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Technology> Technologies { get; set; }
     
