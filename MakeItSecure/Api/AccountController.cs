@@ -30,7 +30,7 @@ namespace Udan.Api
 			{
 				return Ok();
 			}
-			return Json(result);
+
 			return HttpUnauthorized();
 		}
 	}
